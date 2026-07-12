@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriTwin Premium Mobile UI</title>
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons for clean vector glyphs -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+  <!-- Desktop Wrapper containing the Phone Simulator & State Controller -->
+  <div class="app-container">
+    
+    <!-- State Controller Panel (Visible on desktop for easy review of all 13 states) -->
+    <div class="control-panel">
+      <div class="panel-header">
+        <h2>AgriTwin Design System</h2>
+        <p>Interactive State Controller</p>
+      </div>
+      
+      <div class="control-group">
+        <h3>Primary Flows</h3>
+        <button class="control-btn active" data-target="splash">1. Splash / Landing</button>
+        <button class="control-btn" data-target="onboarding">2. Onboarding</button>
+        <button class="control-btn" data-target="login">3. Login & Sign Up</button>
+        <button class="control-btn" data-target="home">4. Home Dashboard</button>
+      </div>
+
+      <div class="control-group">
+        <h3>Auxiliary Screens</h3>
+        <button class="control-btn" data-target="search">5. Search & Filters</button>
+        <button class="control-btn" data-target="climate">6. Climate Screen</button>
+        <button class="control-btn" data-target="detail">7. Plot Details</button>
+        <button class="control-btn" data-target="profile">8. Profile Screen</button>
+        <button class="control-btn" data-target="settings">9. Settings Screen</button>
+      </div>
+
+      <div class="control-group">
+        <h3>State Overlays</h3>
+        <button class="control-btn" onclick="toggleNotificationPanel()">10. Notifications Panel</button>
+        <button class="control-btn" onclick="showLoadingState()">12. Skeleton Loading State</button>
+        <button class="control-btn" onclick="showErrorState()">13. Error State Banner</button>
+        <button class="control-btn" onclick="showEmptyState()">11. Empty State Showcase</button>
+      </div>
+
+      <div class="control-group">
+        <h3>Theme Control</h3>
+        <button class="theme-toggle-btn" id="themeToggleGlobal">
+          <i data-lucide="moon"></i> Toggle Dark Mode
+        </button>
+      </div>
+
+      <div class="panel-footer">
+        <p>Optimized for 60fps micro-interactions & haptic simulation. Material Design 3 guidelines.</p>
+      </div>
+    </div>
+
+    <!-- Phone Simulator Frame -->
+    <div class="phone-frame shadow-premium">
+      <!-- Phone Ear Piece and Camera Notch -->
+      <div class="phone-notch">
+        <div class="notch-camera"></div>
+        <div class="notch-speaker"></div>
+      </div>
+      
+      <!-- Simulated Phone Screen -->
+      <div class="phone-screen" id="phoneScreen">
+        
+        <!-- Simulated OS Status Bar -->
+        <div class="status-bar">
+          <div class="status-time" id="statusBarTime">09:41</div>
+          <div class="status-icons">
+            <i data-lucide="wifi" class="icon-small"></i>
+            <i data-lucide="signal" class="icon-small"></i>
+            <i data-lucide="battery" class="icon-small"></i>
+          </div>
+        </div>
+
+        <!-- 1. ANIMATED LANDING PAGE / SPLASH SCREEN -->
+        <div class="screen-view active" id="screen-splash">
+          <!-- Animated Background Blobs -->
+          <div class="landing-bg-orb orb-1"></div>
+          <div class="landing-bg-orb orb-2"></div>
+          
+          <div class="splash-content">
+            <div class="splash-logo-container">
+              <div class="splash-glow"></div>
+              <div class="splash-leaf-container">
+                <i data-lucide="leaf" class="splash-icon"></i>
+              </div>
+            </div>
+            <h1 class="brand-title animated-text-up">AgriTwin</h1>
+            <p class="brand-subtitle animated-text-fade">Digital Twin Agriculture</p>
+            
+            <div class="landing-action-container">
+              <button class="btn-primary landing-btn ripple" onclick="switchScreen('onboarding')">
+                Get Started <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ONBOARDING SCREEN -->
+        <div class="screen-view" id="screen-onboarding">
+          <div class="onboarding-carousel" id="onboardingCarousel">
+            
+            <!-- Onboarding Slide 1 -->
+            <div class="onboarding-slide active" data-slide="0">
+              <div class="onboarding-visual">
+                <div class="glow-orb green-orb"></div>
+                <i data-lucide="scan-eye" class="onboarding-icon"></i>
+              </div>
+              <h2 class="slide-title">Smart Diagnostics</h2>
+              <p class="slide-desc">Identify crop diseases instantly by taking a photo of a leaf. Driven by on-device AI model.</p>
+            </div>
+
+            <!-- Onboarding Slide 2 -->
+            <div class="onboarding-slide" data-slide="1">
+              <div class="onboarding-visual">
+                <div class="glow-orb teal"></div>
+                <i data-lucide="cpu" class="onboarding-icon"></i>
+              </div>
+              <h2 class="slide-title">Digital Field Twin</h2>
+              <p class="slide-desc">Simulate soil pH, moisture, and climate impact using real-time sensor analytics.</p>
+            </div>
+
+            <!-- Onboarding Slide 3 -->
+            <div class="onboarding-slide" data-slide="2">
+              <div class="onboarding-visual">
+                <div class="glow-orb amber"></div>
+                <i data-lucide="mic" class="onboarding-icon"></i>
+              </div>
+              <h2 class="slide-title">Sarvam AI Assistant</h2>
+              <p class="slide-desc">Speak in Hindi, Tamil, or Telugu to receive instant, localized advisor tips for your plot.</p>
+            </div>
+
+          </div>
+
+          <!-- Onboarding Navigation Footer -->
+          <div class="onboarding-footer">
+            <div class="carousel-indicators">
+              <span class="indicator active" data-go="0"></span>
+              <span class="indicator" data-go="1"></span>
+              <span class="indicator" data-go="2"></span>
+            </div>
+            <div class="btn-group-row">
+              <button class="btn-text" id="onboardingSkip">Skip</button>
+              <button class="btn-primary ripple" id="onboardingNext">Next <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. LOGIN & SIGN UP -->
+        <div class="screen-view" id="screen-login">
+          <div class="login-header">
+            <div class="login-logo">
+              <i data-lucide="leaf"></i>
+            </div>
+            <h2>Create Local Profile</h2>
+            <p>Access your offline farm intelligence</p>
+          </div>
+
+          <div class="tab-container">
+            <div class="tab-bar">
+              <button class="tab-item active" id="tabLogin">Login</button>
+              <button class="tab-item" id="tabSignUp">Sign Up</button>
+            </div>
+          </div>
+
+          <form class="auth-form" id="authForm" onsubmit="event.preventDefault();">
+            <div class="input-group">
+              <input type="text" id="farmerName" required placeholder=" ">
+              <label for="farmerName">Farmer Name</label>
+              <i data-lucide="user" class="input-icon"></i>
+            </div>
+
+            <div class="input-group">
+              <input type="tel" id="phoneNumber" required placeholder=" ">
+              <label for="phoneNumber">Phone Number / ID</label>
+              <i data-lucide="phone" class="input-icon"></i>
+            </div>
+
+            <div class="input-group">
+              <input type="password" id="securityPin" maxlength="4" required placeholder=" ">
+              <label for="securityPin">Security PIN (4 digits)</label>
+              <i data-lucide="lock" class="input-icon"></i>
+            </div>
+
+            <button type="submit" class="btn-primary btn-block ripple" id="loginSubmitBtn">Get Started</button>
+            
+            <div class="divider-text">OR SIGN IN WITH</div>
+
+            <button type="button" class="btn-outlined btn-block biometric-btn ripple" id="biometricLoginBtn">
+              <i data-lucide="fingerprint" class="bio-icon"></i> Fingerprint Scan
+            </button>
+          </form>
+        </div>
+
+        <!-- 4. HOME DASHBOARD -->
+        <div class="screen-view" id="screen-home">
+          <!-- App Header -->
+          <div class="app-bar">
+            <div class="user-profile">
+              <div class="avatar">S</div>
+              <div class="user-info">
+                <span class="greeting">Namaste,</span>
+                <span class="user-name" id="userNameDisplay">Santhosh</span>
+              </div>
+            </div>
+            <div class="app-bar-actions">
+              <button class="action-btn" onclick="toggleNotificationPanel()" id="notifBell">
+                <i data-lucide="bell"></i>
+                <span class="badge-dot"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Scrollable Home Content -->
+          <div class="scroll-content">
+            <!-- Search & Scan Header Bar -->
+            <div class="search-bar-container">
+              <div class="search-bar-mock" onclick="switchScreen('search')">
+                <i data-lucide="search" class="search-icon"></i>
+                <span>Search fields, pests, crops...</span>
+              </div>
+            </div>
+
+            <!-- Plot Switcher -->
+            <div class="section-container">
+              <div class="section-title-row">
+                <h3>Active Plots</h3>
+                <span class="link-text">Add Plot <i data-lucide="plus-circle" class="icon-inline"></i></span>
+              </div>
+              <div class="plot-horizontal-list" id="homePlotList">
+                <div class="plot-chip active">East Cotton Field</div>
+                <div class="plot-chip">West Rice Crop</div>
+                <div class="plot-chip">North Greenhouse</div>
+              </div>
+            </div>
+
+            <!-- Twin Dials / Gauges -->
+            <div class="section-container">
+              <div class="section-title-row">
+                <h3>AgriTwin Health Dials</h3>
+                <span class="badge-status-green">Optimal</span>
+              </div>
+              
+              <div class="twin-dials-row">
+                <!-- Dial 1: Soil Score -->
+                <div class="dial-card glass-premium">
+                  <div class="dial-gauge-wrapper">
+                    <svg class="dial-svg" viewBox="0 0 100 100">
+                      <circle class="dial-bg" cx="50" cy="50" r="40" />
+                      <circle class="dial-value soil" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="38" />
+                    </svg>
+                    <div class="dial-center">
+                      <span class="dial-number" id="dialSoilValue">85</span>
+                      <span class="dial-unit">%</span>
+                    </div>
+                  </div>
+                  <div class="dial-label">Soil Quality</div>
+                </div>
+
+                <!-- Dial 2: Crop Health -->
+                <div class="dial-card glass-premium">
+                  <div class="dial-gauge-wrapper">
+                    <svg class="dial-svg" viewBox="0 0 100 100">
+                      <circle class="dial-bg" cx="50" cy="50" r="40" />
+                      <circle class="dial-value crop" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="55" />
+                    </svg>
+                    <div class="dial-center">
+                      <span class="dial-number" id="dialCropValue">78</span>
+                      <span class="dial-unit">%</span>
+                    </div>
+                  </div>
+                  <div class="dial-label">Crop Vigor</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI-Powered Field Services -->
+            <div class="section-container">
+              <h3>AI Field Services</h3>
+              <div class="services-grid">
+                <div class="service-item bg-green-light" onclick="switchScreen('detail')">
+                  <div class="service-icon green"><i data-lucide="activity"></i></div>
+                  <div class="service-name">Live Twin</div>
+                </div>
+                <div class="service-item bg-teal-light" onclick="switchScreen('climate')">
+                  <div class="service-icon teal"><i data-lucide="cloud-sun"></i></div>
+                  <div class="service-name">Climate</div>
+                </div>
+                <div class="service-item bg-amber-light" onclick="triggerHapticFeedback(); alert('KrishiMitra: Hello! I am analyzing your cotton plot. How can I help?');">
+                  <div class="service-icon amber"><i data-lucide="message-square-text"></i></div>
+                  <div class="service-name">KrishiMitra</div>
+                </div>
+                <div class="service-item bg-purple-light" onclick="switchScreen('settings')">
+                  <div class="service-icon purple"><i data-lucide="calendar"></i></div>
+                  <div class="service-name">Tasks</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Diagnostics Camera Pipeline Card -->
+            <div class="section-container">
+              <div class="card card-image-pipeline">
+                <div class="card-overlay-gradient"></div>
+                <div class="pipeline-content">
+                  <div class="tag-live">AI Diagnostic Chamber</div>
+                  <h4>Identify Leaf Diseases</h4>
+                  <p>Align crop leaf inside the diagnostics chamber for immediate offline scan results.</p>
+                  
+                  <div class="camera-action-box">
+                    <button class="camera-btn circular-btn ripple" onclick="triggerScanSimulation()">
+                      <i data-lucide="aperture"></i>
+                    </button>
+                    <span class="camera-btn-label">Tap to Scan Crop Leaf</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bottom-spacer"></div>
+          </div>
+        </div>
+
+        <!-- 5. SEARCH SCREEN -->
+        <div class="screen-view" id="screen-search">
+          <div class="screen-header">
+            <button class="back-btn" onclick="switchScreen('home')">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <div class="search-input-wrapper">
+              <input type="text" id="searchField" placeholder="Search crops, fields, diagnostics..." autofocus>
+              <i data-lucide="search" class="search-input-icon"></i>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <span class="filter-chip active">All</span>
+            <span class="filter-chip">Fields</span>
+            <span class="filter-chip">Crop Diseases</span>
+            <span class="filter-chip">Soil Logs</span>
+          </div>
+
+          <div class="scroll-content search-results">
+            <div class="search-results-list" id="searchResultsContainer">
+              <!-- Default list items -->
+              <div class="result-card ripple" onclick="switchScreen('detail')">
+                <div class="result-details">
+                  <h4>East Cotton Field</h4>
+                  <p>Planted: 42 days ago • Soil: Optimal</p>
+                </div>
+                <div class="result-health-badge high">85%</div>
+              </div>
+
+              <div class="result-card ripple" onclick="switchScreen('detail')">
+                <div class="result-details">
+                  <h4>West Rice Crop</h4>
+                  <p>Planted: 15 days ago • Soil: Humid</p>
+                </div>
+                <div class="result-health-badge mid">78%</div>
+              </div>
+
+              <div class="result-card ripple" onclick="showErrorState()">
+                <div class="result-details">
+                  <h4>North Greenhouse</h4>
+                  <p>Planted: 120 days ago • Soil: Low Nitrogen</p>
+                </div>
+                <div class="result-health-badge low">52%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. CLIMATE SCREEN (FUTURE WEATHER REPORT) -->
+        <div class="screen-view" id="screen-climate">
+          <div class="screen-header">
+            <button class="back-btn" onclick="switchScreen('home')">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <h3>Climate Outlook</h3>
+            <button class="action-btn-outlined" onclick="triggerHapticFeedback(); alert('Refreshing weather satellite telemetry...')"><i data-lucide="refresh-cw"></i></button>
+          </div>
+
+          <div class="scroll-content">
+            <!-- Current Weather Card -->
+            <div class="weather-current-card bg-gradient-green">
+              <div class="weather-main-row">
+                <div class="weather-temp-box">
+                  <span class="weather-temp">32°</span>
+                  <span class="weather-unit">C</span>
+                </div>
+                <div class="weather-icon-box">
+                  <i data-lucide="cloud-sun" class="weather-big-icon"></i>
+                  <span class="weather-desc">Partly Cloudy</span>
+                </div>
+              </div>
+              
+              <div class="weather-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Humidity</span>
+                  <span class="meta-val">65%</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Wind Speed</span>
+                  <span class="meta-val">12 km/h</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Rain Prob</span>
+                  <span class="meta-val">20%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Future Weather Report: 5-Day Forecast -->
+            <div class="section-container">
+              <div class="section-title-row">
+                <h3>5-Day Forecast & Soil Impact</h3>
+                <span class="link-text">Details <i data-lucide="chevron-right" class="icon-inline"></i></span>
+              </div>
+              <div class="forecast-list">
+                <!-- Day 1 -->
+                <div class="forecast-row glass-premium">
+                  <div class="forecast-day">Tomorrow</div>
+                  <div class="forecast-icon"><i data-lucide="sun" class="weather-amber"></i></div>
+                  <div class="forecast-temp-range">34° / 24°</div>
+                  <div class="forecast-advice text-amber">High evaporation. Water late.</div>
+                </div>
+                <!-- Day 2 -->
+                <div class="forecast-row glass-premium">
+                  <div class="forecast-day">Mon, 13 Jul</div>
+                  <div class="forecast-icon"><i data-lucide="cloud-rain" class="weather-blue"></i></div>
+                  <div class="forecast-temp-range">29° / 22°</div>
+                  <div class="forecast-advice text-success">Light rain. Reduce watering.</div>
+                </div>
+                <!-- Day 3 -->
+                <div class="forecast-row glass-premium">
+                  <div class="forecast-day">Tue, 14 Jul</div>
+                  <div class="forecast-icon"><i data-lucide="cloud-lightning" class="weather-purple"></i></div>
+                  <div class="forecast-temp-range">27° / 21°</div>
+                  <div class="forecast-advice text-error">Storm risk. Clear drainage.</div>
+                </div>
+                <!-- Day 4 -->
+                <div class="forecast-row glass-premium">
+                  <div class="forecast-day">Wed, 15 Jul</div>
+                  <div class="forecast-icon"><i data-lucide="cloud" class="weather-gray"></i></div>
+                  <div class="forecast-temp-range">30° / 23°</div>
+                  <div class="forecast-advice text-secondary">Overcast. Normal watering.</div>
+                </div>
+                <!-- Day 5 -->
+                <div class="forecast-row glass-premium">
+                  <div class="forecast-day">Thu, 16 Jul</div>
+                  <div class="forecast-icon"><i data-lucide="sun" class="weather-amber"></i></div>
+                  <div class="forecast-temp-range">33° / 24°</div>
+                  <div class="forecast-advice text-secondary">Sunny. Normal soil rate.</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bottom-spacer"></div>
+          </div>
+        </div>
+
+        <!-- 7. DETAIL SCREEN -->
+        <div class="screen-view" id="screen-detail">
+          <div class="screen-header">
+            <button class="back-btn" onclick="switchScreen('home')">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <h3>East Cotton Field</h3>
+            <button class="action-btn-outlined"><i data-lucide="more-vertical"></i></button>
+          </div>
+
+          <div class="scroll-content">
+            <!-- Soil and Vigor Radial Health Dials -->
+            <div class="detail-summary-card glass-premium">
+              <div class="score-grid">
+                <div class="score-item">
+                  <div class="score-big-circle soil">
+                    <span id="detailSoilScore">85</span>
+                  </div>
+                  <span class="score-label">Soil Health</span>
+                </div>
+                <div class="score-item">
+                  <div class="score-big-circle crop">
+                    <span id="detailCropScore">78</span>
+                  </div>
+                  <span class="score-label">Crop Vigor</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Historical Trends Interactive Chart -->
+            <div class="section-container">
+              <div class="section-title-row">
+                <h3>Soil Trend (Last 7 Days)</h3>
+                <div class="chart-legend">
+                  <span class="legend-dot soil"></span> Soil pH
+                  <span class="legend-dot moisture"></span> Moisture
+                </div>
+              </div>
+              
+              <!-- SVG Polyline Interactive Line Chart -->
+              <div class="chart-card">
+                <svg class="trend-chart-svg" viewBox="0 0 300 150" id="trendChartSvg">
+                  <!-- Grid Lines -->
+                  <line x1="20" y1="20" x2="280" y2="20" stroke="var(--border-color)" stroke-dasharray="3,3" />
+                  <line x1="20" y1="75" x2="280" y2="75" stroke="var(--border-color)" stroke-dasharray="3,3" />
+                  <line x1="20" y1="130" x2="280" y2="130" stroke="var(--border-color)" stroke-dasharray="3,3" />
+                  
+                  <!-- Trend Lines -->
+                  <polyline fill="none" stroke="#2e7d32" stroke-width="3" points="20,110 63,95 106,78 150,90 193,60 236,45 280,38" id="soilChartLine" />
+                  <polyline fill="none" stroke="#14B8A6" stroke-width="2.5" points="20,95 63,80 106,85 150,70 193,55 236,38 280,50" id="moistureChartLine" />
+
+                  <!-- Interaction Circles -->
+                  <circle cx="280" cy="38" r="5" fill="#2e7d32" class="chart-point" />
+                  <circle cx="280" cy="50" r="5" fill="#14B8A6" class="chart-point" />
+                </svg>
+                <div class="chart-x-labels">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive What-If Simulator -->
+            <div class="section-container">
+              <div class="simulator-card glass-premium">
+                <h4>What-If Simulator</h4>
+                <p class="simulator-subtitle">Simulate moisture increases on Soil Health dials</p>
+                
+                <div class="slider-control">
+                  <div class="slider-labels">
+                    <span>Moisture Level</span>
+                    <span id="simulatorMoistureVal">65%</span>
+                  </div>
+                  <input type="range" min="20" max="100" value="65" class="custom-slider" id="simulatorMoistureSlider">
+                </div>
+
+                <div class="slider-control">
+                  <div class="slider-labels">
+                    <span>Nitrogen (NPK)</span>
+                    <span id="simulatorNpkVal">45 kg/h</span>
+                  </div>
+                  <input type="range" min="10" max="90" value="45" class="custom-slider" id="simulatorNpkSlider">
+                </div>
+              </div>
+            </div>
+
+            <!-- Risk projection banner -->
+            <div class="section-container">
+              <div class="risk-factor-banner bg-amber-light">
+                <i data-lucide="alert-circle" class="risk-icon text-amber"></i>
+                <div class="risk-desc">
+                  <h5>High Temperature Warning</h5>
+                  <p>Weather projection shows +3°C tomorrow. Increase moisture watering by 10% to prevent soil stress.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bottom-spacer"></div>
+          </div>
+        </div>
+
+        <!-- 8. PROFILE SCREEN -->
+        <div class="screen-view" id="screen-profile">
+          <div class="profile-card-header bg-gradient-premium">
+            <div class="profile-avatar">S</div>
+            <h3 class="profile-name">Santhosh Kumar</h3>
+            <p class="profile-id">Farmer ID: #AT-98421</p>
+            <div class="badge-row">
+              <span class="badge-tag gold"><i data-lucide="award"></i> Lead Farmer</span>
+              <span class="badge-tag green"><i data-lucide="leaf"></i> Organic certified</span>
+            </div>
+          </div>
+
+          <div class="scroll-content profile-details-box">
+            <div class="profile-stats-grid">
+              <div class="stat-card">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Plots</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number">92%</span>
+                <span class="stat-label">Avg Health</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number">12</span>
+                <span class="stat-label">AI Advice</span>
+              </div>
+            </div>
+
+            <!-- Profile Info Settings -->
+            <div class="settings-list-group">
+              <div class="settings-list-item ripple" onclick="switchScreen('settings')">
+                <div class="item-icon-label">
+                  <i data-lucide="globe"></i>
+                  <span>Preferred Language</span>
+                </div>
+                <div class="item-value">English (EN) <i data-lucide="chevron-right"></i></div>
+              </div>
+
+              <div class="settings-list-item ripple" onclick="alert('Account Details: Offline SQLite database synced with AgriTwin Inference Hub.')">
+                <div class="item-icon-label">
+                  <i data-lucide="shield-check"></i>
+                  <span>Security & Pin</span>
+                </div>
+                <i data-lucide="chevron-right"></i>
+              </div>
+
+              <div class="settings-list-item ripple text-error" onclick="logoutFlow()">
+                <div class="item-icon-label">
+                  <i data-lucide="log-out"></i>
+                  <span>Log Out Profile</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bottom-spacer"></div>
+          </div>
+        </div>
+
+        <!-- 9. SETTINGS SCREEN -->
+        <div class="screen-view" id="screen-settings">
+          <div class="screen-header">
+            <button class="back-btn" onclick="switchScreen('home')">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <h3>Settings Configuration</h3>
+            <div style="width: 36px;"></div>
+          </div>
+
+          <div class="scroll-content">
+            <div class="section-container">
+              <h4 class="settings-sec-title">UI CUSTOMIZATION</h4>
+              <div class="settings-list-group">
+                <div class="settings-list-item">
+                  <div class="item-icon-label">
+                    <i data-lucide="moon"></i>
+                    <span>Dark Mode Theme</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="darkModeToggleSwitch">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="settings-list-item">
+                  <div class="item-icon-label">
+                    <i data-lucide="bell"></i>
+                    <span>Soil Sensor Push Alerts</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="settings-list-item">
+                  <div class="item-icon-label">
+                    <i data-lucide="fingerprint"></i>
+                    <span>Biometric Profile Unlock</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="biometricSettingsToggle" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-container">
+              <h4 class="settings-sec-title">INFERENCE ENGINE CONFIG</h4>
+              <div class="settings-list-group glass-premium" style="padding: 16px;">
+                <div class="input-group light-input" style="margin-bottom: 12px;">
+                  <input type="text" id="backendIpField" value="192.168.1.120" required placeholder=" ">
+                  <label for="backendIpField">Sarvam AI Gateway IP</label>
+                  <i data-lucide="cpu" class="input-icon"></i>
+                </div>
+                <button class="btn-outlined btn-block ripple" id="testServerBtn">Test connection</button>
+                <div class="connection-status-msg" id="connectionStatusBox" style="display:none;"></div>
+              </div>
+            </div>
+
+            <div class="bottom-spacer"></div>
+          </div>
+        </div>
+
+        <!-- 10. BOTTOM NAVIGATION BAR -->
+        <div class="bottom-nav-bar" id="bottomNavBar" style="display: none;">
+          <button class="nav-btn active" data-screen="home">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+          </button>
+          <button class="nav-btn" data-screen="search">
+            <i data-lucide="search"></i>
+            <span>Search</span>
+          </button>
+          <button class="nav-btn" data-screen="climate">
+            <i data-lucide="cloud-sun"></i>
+            <span>Climate</span>
+          </button>
+          <button class="nav-btn" data-screen="profile">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </button>
+        </div>
+
+        <!-- 10. NOTIFICATIONS PANEL (SLIDE DOWN OVERLAY) -->
+        <div class="notifications-panel" id="notificationsPanel">
+          <div class="notif-panel-header">
+            <h4>Notifications</h4>
+            <button class="icon-btn-text" onclick="toggleNotificationPanel()"><i data-lucide="x"></i></button>
+          </div>
+          <div class="notif-list">
+            <div class="notif-item unread">
+              <div class="notif-badge danger"><i data-lucide="droplet"></i></div>
+              <div class="notif-text">
+                <p class="notif-msg"><strong>Critically Low Moisture:</strong> Plot 1 (Cotton) is below 35% humidity.</p>
+                <span class="notif-time">2 mins ago</span>
+              </div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-badge warning"><i data-lucide="thermometer-sun"></i></div>
+              <div class="notif-text">
+                <p class="notif-msg"><strong>High Heat warning:</strong> Expect 38°C tomorrow afternoon.</p>
+                <span class="notif-time">1 hour ago</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-badge success"><i data-lucide="clipboard-check"></i></div>
+              <div class="notif-text">
+                <p class="notif-msg"><strong>Task Completed:</strong> Fertilizer logs successfully backed up to device database.</p>
+                <span class="notif-time">Yesterday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. EMPTY STATE OVERLAY -->
+        <div class="empty-state-overlay" id="emptyStateOverlay">
+          <div class="empty-state-content">
+            <div class="empty-illustration">
+              <i data-lucide="folder-open" class="empty-icon"></i>
+            </div>
+            <h3>No Diagnostic Logs</h3>
+            <p>You haven't scanned any crop leaves in this plot yet. Tap the scan icon below to run your first diagnostic.</p>
+            <button class="btn-primary ripple" onclick="closeEmptyState(); switchScreen('home'); triggerScanSimulation();">Start Scan</button>
+            <button class="btn-outlined btn-block ripple" onclick="closeEmptyState()" style="margin-top:8px;">Go Back</button>
+          </div>
+        </div>
+
+        <!-- 12. SKELETON LOADING OVERLAY -->
+        <div class="loading-state-overlay" id="loadingStateOverlay">
+          <div class="skeleton-header">
+            <div class="skeleton-circle"></div>
+            <div class="skeleton-text-block">
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line sub"></div>
+            </div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line 2-3"></div>
+            <div class="skeleton-line 1-2"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line 2-3"></div>
+            <div class="skeleton-line 1-2"></div>
+          </div>
+          <button class="btn-primary ripple" onclick="closeLoadingState()" style="margin-top: 24px; width: 100%;">Stop Loading Preview</button>
+        </div>
+
+        <!-- 13. ERROR STATE BANNER OVERLAY -->
+        <div class="error-state-overlay" id="errorStateOverlay">
+          <div class="error-card shadow-premium">
+            <div class="error-header">
+              <i data-lucide="cloud-off" class="error-badge-icon"></i>
+              <h4>Connection Failure</h4>
+            </div>
+            <p class="error-msg">Failed to establish handshake with the Local Inference Hub at 192.168.1.120. Check connection status or router IP.</p>
+            <div class="btn-group-row">
+              <button class="btn-outlined ripple" onclick="closeErrorState()">Dismiss</button>
+              <button class="btn-primary ripple" onclick="retryConnectionSimulation()">Retry Handshake</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- IMAGE SCAN PIPELINE SIMULATOR OVERLAY -->
+        <div class="scan-pipeline-overlay" id="scanPipelineOverlay">
+          <div class="scan-camera-view">
+            <div class="scan-target-box">
+              <div class="corner top-left"></div>
+              <div class="corner top-right"></div>
+              <div class="corner bottom-left"></div>
+              <div class="corner bottom-right"></div>
+              <div class="scan-aim-icon"><i data-lucide="leaf"></i></div>
+            </div>
+            <div class="scan-laser"></div>
+            <div class="scan-prompt">Align leaf inside diagnostic frame</div>
+            
+            <div class="scan-loader" id="scanLoader">
+              <div class="spinner-ring"></div>
+              <p>Analyzing plant tissue (on-device AI)...</p>
+            </div>
+            
+            <div class="scan-results-card" id="scanResultsCard">
+              <div class="notif-badge success" style="margin-bottom: 12px; width: fit-content; padding: 6px 12px; border-radius:12px;">
+                Scan Successful
+              </div>
+              <h3>Bacterial Leaf Blight</h3>
+              <p class="scan-confidence">AI Confidence: 94.2%</p>
+              <p class="scan-treatment">Recommendation: Apply copper-based fungicide or spray solution of streptocycline (1g in 10L water).</p>
+              <div class="btn-group-row" style="margin-top:16px;">
+                <button class="btn-outlined ripple" onclick="closeScanSimulation()">Close</button>
+                <button class="btn-primary ripple" onclick="closeScanSimulation(); switchScreen('detail')">View Plot Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=6"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+onnxruntime
+scikit-learn
+xgboost
+joblib
+pillow
+python-multipart
+requests
+asyncio-mqtt
+pyserial-asyncio
