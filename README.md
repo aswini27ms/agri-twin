@@ -99,3 +99,6 @@ To run the app on your phone and connect to the backend running on your PC:
 1. **Removed hardcoded API keys:** Cleaned up and replaced hardcoded bearer tokens in [crop_vision_screen.dart](lib/screens/crop_vision_screen.dart) with secure placeholders, meeting GitHub Push Protection rules.
 2. **Windows Event Loop Policy:** Configured the event loop policy in both `main.py` and `publish_mqtt.py` to use `WindowsSelectorEventLoopPolicy` on Windows. This fixes the `NotImplementedError` raised by `ProactorEventLoop` when registering/removing socket readers in `asyncio-mqtt`.
 3. **Paho-MQTT Version Compatibility:** Downgraded `paho-mqtt` to `1.6.1` to prevent `AttributeError` crashes associated with v2.x changes.
+
+   Block Diagram<img width="1177" height="517" alt="image" src="https://github.com/user-attachments/assets/f2b83611-5b52-4a05-9106-27554f7bdc00" />
+
