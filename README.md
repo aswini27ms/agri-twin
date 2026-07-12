@@ -65,32 +65,32 @@ From the root directory, start the FastAPI server:
 ```bash
 python backend/main.py
 ```
-This runs the API server on **`http://localhost:8000`**.
+This runs the API server on port **`8000`**.
 
 #### 3. Run the Hardware Node Simulator
 In a separate terminal window, start the telemetry generator script:
 ```bash
 python backend/arduino/python/publish_mqtt.py
 ```
-*Note: If no MQTT broker is detected running on `localhost`, the script will print a connection warning and immediately fall back to updating the backend via HTTP POST. You will see live values shifting every 3 seconds.*
+*Note: If no MQTT broker is detected running locally, the script will print a connection warning and immediately fall back to updating the backend via HTTP POST. You will see live values shifting every 3 seconds.*
 
-#### 4. Run the Flutter App
-To launch the frontend on your development machine in headless web-server mode:
+#### 4. Install & Run on Mobile (.apk)
+We have developed a native Android version (`.apk`) of the app. To compile the application package:
 ```bash
-flutter run -d web-server --web-hostname 127.0.0.1 --web-port 8080
+flutter build apk --release
 ```
-Open **[http://127.0.0.1:8080](http://127.0.0.1:8080)** in your browser.
+Copy the generated file `build/app/outputs/flutter-apk/app-release.apk` and install it directly on your Android phone.
 
 ---
 
-### 📱 Running on a Physical Phone
+### 📱 Connecting Phone to PC Backend
 
-If you build the app onto a physical Android or iOS device, the app must connect to your PC's backend over your local network:
+To run the app on your phone and connect to the backend running on your PC:
 
 1. Connect both your phone and PC to the **same Wi-Fi network**.
 2. Find your PC's local IP address (run `ipconfig` on Windows, look for `IPv4 Address` under your active Wi-Fi adapter, e.g., `10.225.67.206`).
-3. Open the app on your phone, go to **Settings**, and update the **Backend IP** to:
-   `http://<YOUR_PC_IP>:8000` (e.g. **`http://10.225.67.206:8000`**).
+3. Open the app on your phone, navigate to the **Settings** tab, and enter the **Backend IP** using your PC's IP address:
+   `http://<YOUR_PC_IP>:8000` (e.g., **`http://10.225.67.206:8000`**).
 
 ---
 
